@@ -23,4 +23,10 @@ export class AuthController {
     const response = await this.authService.register(registerBody);
     return res.json(response);
   }
+
+  @Get("users")
+  async getUsers(@Res() res) {
+    const response = await this.authService.getAllUsers();
+    return res.json(response);
+  }
 }

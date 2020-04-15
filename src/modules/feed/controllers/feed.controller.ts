@@ -1,4 +1,4 @@
-import { Controller, Res, Get, Body, Post } from '@nestjs/common';
+import { Controller, Res, Get, Body, Post, Param } from '@nestjs/common';
 import { FeedService } from '../services/feed.service';
 
 @Controller('feed')
@@ -13,7 +13,23 @@ export class FeedController {
 
   @Post()
   async addPost(@Res() res, @Body() post) {
+    if(!post.likes) {
+      post.likes = [];
+    }
     await this.feedService.add(post);
     return res.json({ created: true });
   }
+
+  @Get(":postId")
+  async getById(@Res() res, @Param("postId") postId) {
+    const response = await this.feedService.getById(postId);
+    return res.json(response);
+  }
+
+  @Get("like/:postId/:userId")
+  async like(@Res() res, @Param("postId") postId, @Param("userId") userId) {
+    const response = await this.feedService.like(postId, userId);
+    return res.json(response);
+  }
+
 }

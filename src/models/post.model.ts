@@ -4,5 +4,6 @@ export interface Post extends Document {
   title: string;
   text: string;
   username: string;
-  likes: number;
+  likes: string[];
+  creationDate: string;
 }

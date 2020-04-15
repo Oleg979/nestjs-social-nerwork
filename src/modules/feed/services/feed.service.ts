@@ -14,4 +14,18 @@ export class FeedService {
   async add(post: Post): Promise<void> {
     await this.postModel.create(post);
   }
+
+  async getById(postId: string): Promise<Post> {
+    return this.postModel.findById(postId);
+  }
+
+  async like(postId: string, userId: string): Promise<Post> {
+    const post = await this.getById(postId);
+    if(post.likes.includes(userId)) {
+      post.likes = post.likes.filter(like => like !== userId);
+    } else {
+      post.likes.push(userId);
+    }
+    return await post.save();
+  }
 }
