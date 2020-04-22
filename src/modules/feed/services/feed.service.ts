@@ -19,6 +19,10 @@ export class FeedService {
     return this.postModel.findById(postId);
   }
 
+  async deleteById(postId: string): Promise<void> {
+    await this.postModel.findByIdAndDelete(postId).exec();
+  }
+
   async like(postId: string, userId: string): Promise<Post> {
     const post = await this.getById(postId);
     if(post.likes.includes(userId)) {
