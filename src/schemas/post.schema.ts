@@ -4,5 +4,6 @@ export const PostSchema = new mongoose.Schema({
   title: String,
   text: String,
   username: String,
-  likes: Number
+  likes: [String],
+  creationDate: String
 });
