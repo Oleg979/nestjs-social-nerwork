@@ -34,7 +34,7 @@ export class FeedController {
 
   @Get("delete/:postId")
   async deleteById(@Res() res, @Param("postId") postId) {
-    await this.feedService.deleteById(postId);
-    return res.json({ deleted: true });
+    const responce = await this.feedService.deleteById(postId);
+    return res.json(response);
   }
 }
